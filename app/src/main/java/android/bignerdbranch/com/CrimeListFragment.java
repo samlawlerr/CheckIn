@@ -29,15 +29,25 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
-    private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 
 
-    private class CrimeHolder extends RecyclerView.ViewHolder
+    private void updateUI() {
+        CrimeLab crimeLab = CrimeLab.get(getActivity());
+        List<Crime> crimes = crimeLab.getCrimes();
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+        private class CrimeHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
