@@ -8,6 +8,8 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private double mLat;
+    private double mLon;
     public Crime() {
         this(UUID.randomUUID());
     }
@@ -45,5 +47,10 @@ public class Crime {
     }
 
 
-
+    public double getLat() {
+        return mLat;
+    }
+    public double getLon(){
+        return mLon;
+    }
 }
