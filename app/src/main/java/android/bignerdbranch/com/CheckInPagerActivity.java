@@ -17,15 +17,15 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends AppCompatActivity {
+public class CheckInPagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
     private static final int REQUEST_ERROR = 0;
 
     private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    private List<CheckIn> mCrimes;
     public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
+        Intent intent = new Intent(packageContext, CheckInPagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
@@ -41,13 +41,13 @@ public class CrimePagerActivity extends AppCompatActivity {
 
 
         mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
-        mCrimes = CrimeLab.get(this).getCrimes();
+        mCrimes = CheckInLab.get(this).getCheckIn();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+                CheckIn crime = mCrimes.get(position);
+                return CheckInFragment.newInstance(crime.getId());
             }
             @Override
             public int getCount() {

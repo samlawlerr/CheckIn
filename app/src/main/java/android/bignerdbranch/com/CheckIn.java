@@ -3,17 +3,17 @@ package android.bignerdbranch.com;
 import java.util.Date;
 import java.util.UUID;
 
-public class Crime {
+public class CheckIn {
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private double mLat;
     private double mLon;
-    public Crime() {
+    public CheckIn() {
         this(UUID.randomUUID());
     }
 
-    public Crime(UUID id) {
+    public CheckIn(UUID id) {
         mId = id;
         mDate = new Date();
     }

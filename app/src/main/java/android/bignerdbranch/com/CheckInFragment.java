@@ -23,8 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,12 +38,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment {
+public class CheckInFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogData";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_PHOTO= 1;
-    private Crime mCrime;
+    private CheckIn mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private Button mDeleteButton;
@@ -58,10 +56,10 @@ public class CrimeFragment extends Fragment {
     private TextView mLocation;
 
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static CheckInFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
-        CrimeFragment fragment = new CrimeFragment();
+        CheckInFragment fragment = new CheckInFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,8 +68,8 @@ public class CrimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
-        mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
+        mCrime = CheckInLab.get(getActivity()).getCheckIn(crimeId);
+        mPhotoFile = CheckInLab.get(getActivity()).getPhotoFile(mCrime);
 
         mClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
@@ -106,7 +104,7 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        CrimeLab.get(getActivity())
+        CheckInLab.get(getActivity())
                 .updateCrime(mCrime);
     }
 
@@ -154,7 +152,7 @@ public class CrimeFragment extends Fragment {
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                CheckInLab.get(getActivity()).deleteCheckIn(mCrime);
 
                 getActivity().finish();
             }
@@ -168,7 +166,7 @@ public class CrimeFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment
                         .newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(CheckInFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
@@ -202,7 +200,7 @@ public class CrimeFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+                i.putExtra(Intent.EXTRA_TEXT, getCheckInReport());
                 i = Intent.createChooser(i, getString(R.string.send_report));
                 startActivity(i);
             }
@@ -264,7 +262,7 @@ public class CrimeFragment extends Fragment {
         mDateButton.setText(mCrime.getDate().toString());
     }
 
-    private String getCrimeReport() {
+    private String getCheckInReport() {
 
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat,
