@@ -2,9 +2,9 @@
     <string name="app_name">MyCheckIns</string>
     <string name="check_title_hint">Enter a title for the check in.</string>
     <string name="check_title_label">Title</string>
-    <string name="crime_details_label">Details</string>
+    <string name="checkin_details_label">Details</string>
     <string name="date_picker_title">Date of check in:</string>
-    <string name="new_crime">New Check in</string>
+    <string name="new_checkin">New Check in</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="subtitle_format">%1$d check ins</string>
