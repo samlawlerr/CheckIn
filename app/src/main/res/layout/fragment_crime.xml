@@ -57,12 +57,6 @@
         android:id="@+id/crime_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <CheckBox
-        android:id="@+id/crime_solved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="@string/crime_solved_label"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -91,7 +85,7 @@
         android:text="Delete Crime" />
 
     <Button
-        android:id="@+id/crime_report"
+        android:id="@+id/share_checkin"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

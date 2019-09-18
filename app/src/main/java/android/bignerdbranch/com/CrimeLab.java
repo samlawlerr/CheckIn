@@ -109,7 +109,7 @@ public class CrimeLab {
         values.put(CrimeDbSchema.CrimeTable.Cols.UUID, crime.getId().toString());
         values.put(CrimeDbSchema.CrimeTable.Cols.TITLE, crime.getTitle());
         values.put(CrimeDbSchema.CrimeTable.Cols.DATE, crime.getDate().getTime());
-        values.put(CrimeDbSchema.CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(CrimeDbSchema.CrimeTable.Cols.LOCATION, crime.getLocation();
         return values;
     }
 }
