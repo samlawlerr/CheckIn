@@ -39,11 +39,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class CheckInFragment extends Fragment {
-    private static final String ARG_CRIME_ID = "crime_id";
+    private static final String ARG_CHECK_ID = "check_id";
     private static final String DIALOG_DATE = "DialogData";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_PHOTO= 1;
-    private CheckIn mCrime;
+    private CheckIn mCheckIn;
     private EditText mTitleField;
     private Button mDateButton;
     private Button mDeleteButton;
@@ -56,9 +56,9 @@ public class CheckInFragment extends Fragment {
     private TextView mLocation;
 
 
-    public static CheckInFragment newInstance(UUID crimeId) {
+    public static CheckInFragment newInstance(UUID checkID) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(ARG_CHECK_ID, checkID);
         CheckInFragment fragment = new CheckInFragment();
         fragment.setArguments(args);
         return fragment;
@@ -67,9 +67,9 @@ public class CheckInFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CheckInLab.get(getActivity()).getCheckIn(crimeId);
-        mPhotoFile = CheckInLab.get(getActivity()).getPhotoFile(mCrime);
+        UUID checkId = (UUID) getArguments().getSerializable(ARG_CHECK_ID);
+        mCheckIn = CheckInLab.get(getActivity()).getCheckIn(checkId);
+        mPhotoFile = CheckInLab.get(getActivity()).getPhotoFile(mCheckIn);
 
         mClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
@@ -105,7 +105,7 @@ public class CheckInFragment extends Fragment {
     public void onPause() {
         super.onPause();
         CheckInLab.get(getActivity())
-                .updateCrime(mCrime);
+                .updateCheckIn(mCheckIn);
     }
 
     @Override
@@ -125,53 +125,50 @@ public class CheckInFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
-        //
         PackageManager packageManager = getActivity().getPackageManager();
 
-        mTitleField = (EditText) v.findViewById(R.id.crime_title);
-        mTitleField.setText(mCrime.getTitle());
+        mTitleField = (EditText) v.findViewById(R.id.check_title);
+        mTitleField.setText(mCheckIn.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                    // This space intentionally left blank
             }
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString());
+                mCheckIn.setTitle(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
-                // This one too
             }
 
 
         });
-        mDeleteButton = (Button) v.findViewById(R.id.crime_delete);
+        mDeleteButton = (Button) v.findViewById(R.id.check_delete);
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckInLab.get(getActivity()).deleteCheckIn(mCrime);
+                CheckInLab.get(getActivity()).deleteCheckIn(mCheckIn);
 
                 getActivity().finish();
             }
         });
 
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mDateButton = (Button) v.findViewById(R.id.check_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment
-                        .newInstance(mCrime.getDate());
+                        .newInstance(mCheckIn.getDate());
                 dialog.setTargetFragment(CheckInFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
 
-        mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
+        mPhotoButton = (ImageButton) v.findViewById(R.id.check_camera);
 
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         boolean canTakePhoto = mPhotoFile != null &&
@@ -195,7 +192,7 @@ public class CheckInFragment extends Fragment {
             }
         });
 
-        mReportButton = (Button) v.findViewById(R.id.share_checkin);
+        mReportButton = (Button) v.findViewById(R.id.check_share);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
@@ -206,8 +203,8 @@ public class CheckInFragment extends Fragment {
             }
         });
 
-        mLocation = (TextView) v.findViewById(R.id.crime_location);
-        String coordinates = ("Latitude " + mCrime.getLat() + " Longitude " + mCrime.getLon());
+        mLocation = (TextView) v.findViewById(R.id.check_location);
+        String coordinates = ("Latitude " + mCheckIn.getLat() + " Longitude " + mCheckIn.getLon());
         mLocation.setText(coordinates);
 
 
@@ -216,13 +213,13 @@ public class CheckInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("latitude", mCrime.getLat());
-                intent.putExtra("longitude", mCrime.getLon());
+                intent.putExtra("latitude", mCheckIn.getLat());
+                intent.putExtra("longitude", mCheckIn.getLon());
                 startActivity(intent);
             }
         });
 
-        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        mPhotoView = (ImageView) v.findViewById(R.id.check_photo);
         updatePhotoView();
 
         return v;
@@ -236,7 +233,7 @@ public class CheckInFragment extends Fragment {
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mCrime.setDate(date);
+            mCheckIn.setDate(date);
             updateDate();
         } else if (requestCode == REQUEST_PHOTO) {
             Uri uri = FileProvider.getUriForFile(getActivity(),
@@ -259,16 +256,16 @@ public class CheckInFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
+        mDateButton.setText(mCheckIn.getDate().toString());
     }
 
     private String getCheckInReport() {
 
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat,
-                mCrime.getDate()).toString();
+                mCheckIn.getDate()).toString();
 
-        String report = getString(R.string.share_checkin, mCrime.getTitle(), dateString, mCrime.getLocation());
+        String report = getString(R.string.check_share, mCheckIn.getTitle(), dateString, mCheckIn.getLocation());
 
         return report;
     }

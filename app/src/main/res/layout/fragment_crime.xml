@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/crime_photo"
+                android:id="@+id/check_photo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerInside"
                 android:cropToPadding="true"
                 android:background="@android:color/darker_gray" />
             <ImageButton
-                android:id="@+id/crime_camera"
+                android:id="@+id/check_camera"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_camera" />
@@ -39,12 +39,12 @@
                 style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/crime_title_label" />
+                android:text="@string/check_title_label" />
             <EditText
-                android:id="@+id/crime_title"
+                android:id="@+id/check_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/crime_title_hint"/>
+                android:hint="@string/check_title_hint"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_details_label"/>
     <Button
-        android:id="@+id/crime_date"
+        android:id="@+id/check_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/crime_location"
+            android:id="@+id/check_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -79,13 +79,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/crime_delete"
+        android:id="@+id/check_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete Crime" />
 
     <Button
-        android:id="@+id/share_checkin"
+        android:id="@+id/check_share"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

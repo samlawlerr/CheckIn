@@ -23,10 +23,10 @@ public class CheckInPagerActivity extends AppCompatActivity {
     private static final int REQUEST_ERROR = 0;
 
     private ViewPager mViewPager;
-    private List<CheckIn> mCrimes;
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
+    private List<CheckIn> mCheckIns;
+    public static Intent newIntent(Context packageContext, UUID checkId) {
         Intent intent = new Intent(packageContext, CheckInPagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_CRIME_ID, checkId);
         return intent;
     }
 
@@ -36,27 +36,27 @@ public class CheckInPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crime_pager);
 
-        UUID crimeId = (UUID) getIntent()
+        UUID checkId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_CRIME_ID);
 
 
         mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
-        mCrimes = CheckInLab.get(this).getCheckIn();
+        mCheckIns = CheckInLab.get(this).getCheckIn();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                CheckIn crime = mCrimes.get(position);
+                CheckIn crime = mCheckIns.get(position);
                 return CheckInFragment.newInstance(crime.getId());
             }
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mCheckIns.size();
             }
         });
 
-        for (int i = 0; i < mCrimes.size(); i++) {
-            if (mCrimes.get(i).getId().equals(crimeId)) {
+        for (int i = 0; i < mCheckIns.size(); i++) {
+            if (mCheckIns.get(i).getId().equals(checkId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

@@ -83,7 +83,7 @@ public class CheckInLab {
         mDatabase.delete(CheckInDbSchema.CrimeTable.NAME, "uuid =" + '"' + crime.getId() + '"', null);
     }
 
-    public void updateCrime(CheckIn crime) {
+    public void updateCheckIn(CheckIn crime) {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
         mDatabase.update(CheckInDbSchema.CrimeTable.NAME, values,

@@ -18,11 +18,11 @@ public class CheckInCursorWrapper extends CursorWrapper {
         String location = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.LOCATION));
 
 
-        CheckIn crime = new CheckIn(UUID.fromString(uuidString));
-        crime.setTitle(title);
-        crime.setDate(new Date(date));
-        crime.getLocation();
-        return crime;
+        CheckIn check = new CheckIn(UUID.fromString(uuidString));
+        check.setTitle(title);
+        check.setDate(new Date(date));
+        check.getLocation();
+        return check;
     }
 }
 
