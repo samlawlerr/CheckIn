@@ -15,7 +15,7 @@ public class CheckInCursorWrapper extends CursorWrapper {
         String uuidString = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.UUID));
         String title = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.TITLE));
         long date = getLong(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.DATE));
-        int isSolved = getInt(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.LOCATION));
+        String location = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.LOCATION));
 
 
         CheckIn crime = new CheckIn(UUID.fromString(uuidString));
