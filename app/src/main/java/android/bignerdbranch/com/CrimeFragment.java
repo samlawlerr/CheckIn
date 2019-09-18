@@ -28,6 +28,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -55,6 +56,7 @@ public class CrimeFragment extends Fragment {
     private Button mReportButton;
     private GoogleApiClient mClient;
     private Button mMapButton;
+    private TextView mLocation;
 
 
     public static CrimeFragment newInstance(UUID crimeId) {
@@ -218,6 +220,11 @@ public class CrimeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        mLocation = (TextView) v.findViewById(R.id.crime_location);
+        String coordinates = ("Latitude " + mCrime.getLat() + " Longitude " + mCrime.getLon());
+        mLocation.setText(coordinates);
+
 
         mMapButton = (Button) v.findViewById(R.id.show_map);
         mMapButton.setOnClickListener(new View.OnClickListener() {
