@@ -34,7 +34,7 @@ public class CheckInLab {
 
     public void addCheckIn(CheckIn c) {
         ContentValues values = getContentValues(c);
-        mDatabase.insert(CheckInDbSchema.CrimeTable.NAME, null, values);
+        mDatabase.insert(CheckInDbSchema.CheckInTable.NAME, null, values);
 
     }
 
@@ -56,7 +56,7 @@ public class CheckInLab {
 
     public CheckIn getCheckIn(UUID id) {
         CheckInCursorWrapper cursor = queryCrimes(
-                CheckInDbSchema.CrimeTable.Cols.UUID + " = ?",
+                CheckInDbSchema.CheckInTable.Cols.UUID + " = ?",
                 new String[] { id.toString() }
         );
         try {
@@ -80,20 +80,20 @@ public class CheckInLab {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
 
-        mDatabase.delete(CheckInDbSchema.CrimeTable.NAME, "uuid =" + '"' + crime.getId() + '"', null);
+        mDatabase.delete(CheckInDbSchema.CheckInTable.NAME, "uuid =" + '"' + crime.getId() + '"', null);
     }
 
     public void updateCheckIn(CheckIn crime) {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
-        mDatabase.update(CheckInDbSchema.CrimeTable.NAME, values,
-                CheckInDbSchema.CrimeTable.Cols.UUID + " = ?",
+        mDatabase.update(CheckInDbSchema.CheckInTable.NAME, values,
+                CheckInDbSchema.CheckInTable.Cols.UUID + " = ?",
                 new String[] { uuidString });
     }
 
     private CheckInCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
-                CheckInDbSchema.CrimeTable.NAME,
+                CheckInDbSchema.CheckInTable.NAME,
                 null, // columns - null selects all columns
                 whereClause,
                 whereArgs,
@@ -106,10 +106,10 @@ public class CheckInLab {
 
     private static ContentValues getContentValues(CheckIn crime) {
         ContentValues values = new ContentValues();
-        values.put(CheckInDbSchema.CrimeTable.Cols.UUID, crime.getId().toString());
-        values.put(CheckInDbSchema.CrimeTable.Cols.TITLE, crime.getTitle());
-        values.put(CheckInDbSchema.CrimeTable.Cols.DATE, crime.getDate().getTime());
-        values.put(CheckInDbSchema.CrimeTable.Cols.LOCATION, crime.getLocation());
+        values.put(CheckInDbSchema.CheckInTable.Cols.UUID, crime.getId().toString());
+        values.put(CheckInDbSchema.CheckInTable.Cols.TITLE, crime.getTitle());
+        values.put(CheckInDbSchema.CheckInTable.Cols.DATE, crime.getDate().getTime());
+        values.put(CheckInDbSchema.CheckInTable.Cols.LOCATION, crime.getLocation());
         return values;
     }
 }

@@ -40,7 +40,7 @@ public class CheckInPagerActivity extends AppCompatActivity {
                 .getSerializableExtra(EXTRA_CRIME_ID);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.checkin_view_pager);
         mCheckIns = CheckInLab.get(this).getCheckIn();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {

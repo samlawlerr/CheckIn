@@ -12,10 +12,10 @@ public class CheckInCursorWrapper extends CursorWrapper {
         super(cursor);
     }
     public CheckIn getCheckIn() {
-        String uuidString = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.UUID));
-        String title = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.TITLE));
-        long date = getLong(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.DATE));
-        String location = getString(getColumnIndex(CheckInDbSchema.CrimeTable.Cols.LOCATION));
+        String uuidString = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.UUID));
+        String title = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.TITLE));
+        long date = getLong(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.DATE));
+        String location = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.LOCATION));
 
 
         CheckIn check = new CheckIn(UUID.fromString(uuidString));

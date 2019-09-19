@@ -36,7 +36,7 @@ public class CheckInListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
         mCheckInRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
+                .findViewById(R.id.checkin_recycler_view);
         mCheckInRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -78,7 +78,7 @@ public class CheckInListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_crime:
+            case R.id.new_checkin:
                 CheckIn crime = new CheckIn();
                 CheckInLab.get(getActivity()).addCheckIn(crime);
                 Intent intent = CheckInPagerActivity
