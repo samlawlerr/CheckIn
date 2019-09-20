@@ -2,7 +2,7 @@ package android.bignerdbranch.com.CrimeDbSchema;
 
 public class CheckInDbSchema {
     public static final class CheckInTable {
-        public static final String NAME = "checkIn";
+        public static final String NAME = "checkInBase";
 
         public static final class Cols{
             public static final String UUID = "uuid";

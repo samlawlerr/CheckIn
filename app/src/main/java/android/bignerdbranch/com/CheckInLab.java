@@ -15,15 +15,15 @@ import java.util.UUID;
 import android.bignerdbranch.com.CrimeDbSchema.CheckInBaseHelper;
 
 public class CheckInLab {
-    private static CheckInLab sCrimeLab;
+    private static CheckInLab sCheckLab;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     public static CheckInLab get(Context context) {
-        if (sCrimeLab == null) {
-            sCrimeLab = new CheckInLab(context);
+        if (sCheckLab == null) {
+            sCheckLab = new CheckInLab(context);
         }
-        return sCrimeLab;
+        return sCheckLab;
     }
     private CheckInLab(Context context) {
         mContext = context.getApplicationContext();
@@ -40,22 +40,22 @@ public class CheckInLab {
 
 
     public List<CheckIn> getCheckIn() {
-        List<CheckIn> crimes = new ArrayList<>();
-        CheckInCursorWrapper cursor = queryCrimes(null, null);
+        List<CheckIn> checks = new ArrayList<>();
+        CheckInCursorWrapper cursor = queryChecks(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                crimes.add(cursor.getCheckIn());
+                checks.add(cursor.getCheckIn());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        return crimes;
+        return checks;
     }
 
     public CheckIn getCheckIn(UUID id) {
-        CheckInCursorWrapper cursor = queryCrimes(
+        CheckInCursorWrapper cursor = queryChecks(
                 CheckInDbSchema.CheckInTable.Cols.UUID + " = ?",
                 new String[] { id.toString() }
         );
@@ -71,30 +71,30 @@ public class CheckInLab {
 
     }
 
-    public File getPhotoFile(CheckIn crime) {
+    public File getPhotoFile(CheckIn check) {
         File filesDir = mContext.getFilesDir();
-        return new File(filesDir, crime.getPhotoFilename());
+        return new File(filesDir, check.getPhotoFilename());
     }
 
-    public void deleteCheckIn(CheckIn crime) {
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+    public void deleteCheckIn(CheckIn check) {
+        String uuidString = check.getId().toString();
+        ContentValues values = getContentValues(check);
 
-        mDatabase.delete(CheckInDbSchema.CheckInTable.NAME, "uuid =" + '"' + crime.getId() + '"', null);
+        mDatabase.delete(CheckInDbSchema.CheckInTable.NAME, "uuid =" + '"' + check.getId() + '"', null);
     }
 
-    public void updateCheckIn(CheckIn crime) {
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+    public void updateCheckIn(CheckIn check) {
+        String uuidString = check.getId().toString();
+        ContentValues values = getContentValues(check);
         mDatabase.update(CheckInDbSchema.CheckInTable.NAME, values,
                 CheckInDbSchema.CheckInTable.Cols.UUID + " = ?",
                 new String[] { uuidString });
     }
 
-    private CheckInCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
+    private CheckInCursorWrapper queryChecks(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 CheckInDbSchema.CheckInTable.NAME,
-                null, // columns - null selects all columns
+                null,
                 whereClause,
                 whereArgs,
                 null, // groupBy
@@ -104,12 +104,12 @@ public class CheckInLab {
         return new CheckInCursorWrapper(cursor);
     }
 
-    private static ContentValues getContentValues(CheckIn crime) {
+    private static ContentValues getContentValues(CheckIn check) {
         ContentValues values = new ContentValues();
-        values.put(CheckInDbSchema.CheckInTable.Cols.UUID, crime.getId().toString());
-        values.put(CheckInDbSchema.CheckInTable.Cols.TITLE, crime.getTitle());
-        values.put(CheckInDbSchema.CheckInTable.Cols.DATE, crime.getDate().getTime());
-        values.put(CheckInDbSchema.CheckInTable.Cols.LOCATION, crime.getLocation());
+        values.put(CheckInDbSchema.CheckInTable.Cols.UUID, check.getId().toString());
+        values.put(CheckInDbSchema.CheckInTable.Cols.TITLE, check.getTitle());
+        values.put(CheckInDbSchema.CheckInTable.Cols.DATE, check.getDate().getTime());
+        values.put(CheckInDbSchema.CheckInTable.Cols.LOCATION, check.getLocation());
         return values;
     }
 }

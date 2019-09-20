@@ -123,7 +123,7 @@ public class CheckInFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        View v = inflater.inflate(R.layout.fragment_checkin, container, false);
 
         PackageManager packageManager = getActivity().getPackageManager();
 

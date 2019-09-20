@@ -18,15 +18,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class CheckInPagerActivity extends AppCompatActivity {
-    private static final String EXTRA_CRIME_ID =
-            "com.bignerdranch.android.criminalintent.crime_id";
+    private static final String EXTRA_CHECK_ID = "com.bignerdranch.android.criminalintent.crime_id";
     private static final int REQUEST_ERROR = 0;
 
     private ViewPager mViewPager;
     private List<CheckIn> mCheckIns;
     public static Intent newIntent(Context packageContext, UUID checkId) {
         Intent intent = new Intent(packageContext, CheckInPagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, checkId);
+        intent.putExtra(EXTRA_CHECK_ID, checkId);
         return intent;
     }
 
@@ -34,10 +33,10 @@ public class CheckInPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
+        setContentView(R.layout.activity_checkin_pager);
 
         UUID checkId = (UUID) getIntent()
-                .getSerializableExtra(EXTRA_CRIME_ID);
+                .getSerializableExtra(EXTRA_CHECK_ID);
 
 
         mViewPager = (ViewPager) findViewById(R.id.checkin_view_pager);
@@ -46,8 +45,8 @@ public class CheckInPagerActivity extends AppCompatActivity {
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                CheckIn crime = mCheckIns.get(position);
-                return CheckInFragment.newInstance(crime.getId());
+                CheckIn check = mCheckIns.get(position);
+                return CheckInFragment.newInstance(check.getId());
             }
             @Override
             public int getCount() {
