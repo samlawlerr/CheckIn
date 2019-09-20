@@ -82,14 +82,14 @@
         android:id="@+id/check_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Crime" />
+        android:text="Delete CheckIn" />
 
     <Button
         android:id="@+id/check_share"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Share Crime"/>
+        android:text="Share CheckIn"/>
 
 
 

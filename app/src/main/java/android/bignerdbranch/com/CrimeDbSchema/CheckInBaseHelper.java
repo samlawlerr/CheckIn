@@ -14,7 +14,7 @@ public class CheckInBaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table checkIn" + CheckInTable.NAME + "(" +
+        db.execSQL("create table " + CheckInTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
                 CheckInTable.Cols.UUID + ", " +
                 CheckInTable.Cols.TITLE + ", " +
