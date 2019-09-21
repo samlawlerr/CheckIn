@@ -90,7 +90,8 @@ public class CheckInListFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
                 return true;
-
+            case R.id.help:
+                //Do something help button
             default:
                 return super.onOptionsItemSelected(item);
         }
