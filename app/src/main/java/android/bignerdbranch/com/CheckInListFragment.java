@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
@@ -27,6 +29,7 @@ public class CheckInListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
     }
 
@@ -91,7 +94,7 @@ public class CheckInListFragment extends Fragment {
                 updateSubtitle();
                 return true;
             case R.id.help:
-                //Do something help button
+                //write something here to call action
             default:
                 return super.onOptionsItemSelected(item);
         }
