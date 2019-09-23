@@ -1,6 +1,7 @@
 package android.bignerdbranch.com;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -94,7 +95,8 @@ public class CheckInListFragment extends Fragment {
                 updateSubtitle();
                 return true;
             case R.id.help:
-                //write something here to call action
+                intent = HelpWebPage.newIntent(getActivity(), Uri.parse("https://www.google.com"));
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }

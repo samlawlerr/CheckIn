@@ -51,6 +51,9 @@
         <activity
             android:name=".CheckInPagerActivity"
             android:parentActivityName=".CheckInListActivity"></activity>
+        <activity
+            android:name=".HelpWebPage"
+            android:parentActivityName=".CheckInListActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
