@@ -21,10 +21,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class CheckInListFragment extends Fragment {
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
     private RecyclerView mCheckInRecyclerView;
     private CrimeAdapter mAdapter;
-    private boolean mSubtitleVisible;
 
 
     @Override
@@ -42,9 +40,6 @@ public class CheckInListFragment extends Fragment {
         mCheckInRecyclerView = (RecyclerView) view
                 .findViewById(R.id.checkin_recycler_view);
         mCheckInRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (savedInstanceState != null) {
-            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
-        }
 
         updateUI();
         return view;
@@ -62,21 +57,12 @@ public class CheckInListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_checkin_list, menu);
-
-        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if (mSubtitleVisible) {
-            subtitleItem.setTitle(R.string.hide_subtitle);
-        } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
-        }
-
     }
 
     @Override
@@ -89,28 +75,12 @@ public class CheckInListFragment extends Fragment {
                         .newIntent(getActivity(), check.getId());
                 startActivity(intent);
                 return true;
-            case R.id.show_subtitle:
-                mSubtitleVisible = !mSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
-                updateSubtitle();
-                return true;
             case R.id.help:
                 intent = HelpWebPage.newIntent(getActivity(), Uri.parse("https://www.google.com"));
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void updateSubtitle() {
-        CheckInLab checkLab = CheckInLab.get(getActivity());
-        int checkCount = checkLab.getCheckIn().size();
-        String subtitle = getString(R.string.subtitle_format, checkCount);
-        if (!mSubtitleVisible) {
-            subtitle = null;
-        }
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     private void updateUI() {
@@ -123,7 +93,6 @@ public class CheckInListFragment extends Fragment {
             mAdapter.setChecks(checks);
             mAdapter.notifyDataSetChanged();
         }
-        updateSubtitle();
     }
 
         private class CrimeHolder extends RecyclerView.ViewHolder
@@ -131,6 +100,7 @@ public class CheckInListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckIn mCheckIn;
+        private TextView mDetailsTextView;
 
 
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -145,6 +115,7 @@ public class CheckInListFragment extends Fragment {
             mCheckIn = check;
             mTitleTextView.setText(mCheckIn.getTitle());
             mDateTextView.setText(mCheckIn.getDate().toString());
+            mDetailsTextView.setText(mCheckIn.getDetails().toString());
         }
 
         @Override

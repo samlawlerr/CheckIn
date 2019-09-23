@@ -7,6 +7,7 @@ public class CheckIn {
     private UUID mId;
     private String mTitle;
     private Date mDate;
+    private String mDetails;
     private double mLat;
     private double mLon;
     public CheckIn() {
@@ -29,6 +30,12 @@ public class CheckIn {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public String getDetails() {return mDetails;}
+
+    public void setDetails(String details){
+        mDetails = details;
     }
 
     public Date getDate() {

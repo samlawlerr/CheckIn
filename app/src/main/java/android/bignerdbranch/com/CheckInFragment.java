@@ -45,6 +45,7 @@ public class CheckInFragment extends Fragment {
     private static final int REQUEST_PHOTO= 1;
     private CheckIn mCheckIn;
     private EditText mTitleField;
+    private EditText mDetailsField;
     private Button mDateButton;
     private Button mDeleteButton;
     private ImageButton mPhotoButton;
@@ -142,9 +143,25 @@ public class CheckInFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
             }
-
-
         });
+
+        mDetailsField = (EditText) v.findViewById(R.id.check_details);
+        mDetailsField.setText(mCheckIn.getDetails());
+        mDetailsField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int count) {
+                mCheckIn.setDetails(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         mDeleteButton = (Button) v.findViewById(R.id.check_delete);
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
