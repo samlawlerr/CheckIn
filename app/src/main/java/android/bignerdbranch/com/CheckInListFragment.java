@@ -107,7 +107,6 @@ public class CheckInListFragment extends Fragment {
             mTitleTextView = itemView.findViewById(R.id.check_title);
             mDateTextView =  itemView.findViewById(R.id.check_date);
             mDetailsTextView =  itemView.findViewById(R.id.check_details);
-            System.out.println("hi");
 
         }
 
