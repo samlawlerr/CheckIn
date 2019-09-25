@@ -153,8 +153,7 @@ public class CheckInFragment extends Fragment {
                     CharSequence s, int start, int count, int after) {
             }
             @Override
-            public void onTextChanged(
-                    CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mCheckIn.setDetails(s.toString());
             }
             @Override

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
@@ -95,7 +92,7 @@ public class CheckInListFragment extends Fragment {
         }
     }
 
-        private class CrimeHolder extends RecyclerView.ViewHolder
+        private class CheckInHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
@@ -103,11 +100,14 @@ public class CheckInListFragment extends Fragment {
         private TextView mDetailsTextView;
 
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
+        public CheckInHolder(LayoutInflater inflater, ViewGroup parent) {
+
             super(inflater.inflate(R.layout.list_item_checkin, parent, false));
             itemView.setOnClickListener(this);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.check_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.check_date);
+            mTitleTextView = itemView.findViewById(R.id.check_title);
+            mDateTextView =  itemView.findViewById(R.id.check_date);
+            mDetailsTextView =  itemView.findViewById(R.id.check_details);
+            System.out.println("hi");
 
         }
 
@@ -115,7 +115,7 @@ public class CheckInListFragment extends Fragment {
             mCheckIn = check;
             mTitleTextView.setText(mCheckIn.getTitle());
             mDateTextView.setText(mCheckIn.getDate().toString());
-            mDetailsTextView.setText(mCheckIn.getDetails().toString());
+            mDetailsTextView.setText(mCheckIn.getDetails());
         }
 
         @Override
@@ -126,22 +126,22 @@ public class CheckInListFragment extends Fragment {
         }
     }
 
-    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+    private class CrimeAdapter extends RecyclerView.Adapter<CheckInHolder> {
         private List<CheckIn> mCheckIns;
         public CrimeAdapter(List<CheckIn> checks) {
             mCheckIns = checks;
         }
 
         @Override
-        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public CheckInHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new CrimeHolder(layoutInflater, parent);
+            return new CheckInHolder(layoutInflater, parent);
 
 
         }
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
+        public void onBindViewHolder(CheckInHolder holder, int position) {
             CheckIn check = mCheckIns.get(position);
             holder.bind(check);
 

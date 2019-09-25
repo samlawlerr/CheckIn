@@ -9,8 +9,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.util.UUID;
-
 public class HelpWebPage extends AppCompatActivity {
     private WebView mWebView;
 
