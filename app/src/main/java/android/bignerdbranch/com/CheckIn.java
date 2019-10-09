@@ -8,6 +8,7 @@ public class CheckIn {
     private String mTitle;
     private Date mDate;
     private String mDetails;
+    private String mPlace;
     private double mLat;
     private double mLon;
     public CheckIn() {
@@ -36,6 +37,12 @@ public class CheckIn {
 
     public void setDetails(String details){
         mDetails = details;
+    }
+
+    public String getPlace() {return mPlace;}
+
+    public void setPlace(String place){
+        mPlace = place;
     }
 
     public Date getDate() {

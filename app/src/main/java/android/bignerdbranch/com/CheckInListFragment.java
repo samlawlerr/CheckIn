@@ -97,7 +97,7 @@ public class CheckInListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckIn mCheckIn;
-        //private TextView mDetailsTextView;
+        private TextView mPlaceTextView;
 
 
         public CheckInHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -106,7 +106,7 @@ public class CheckInListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = itemView.findViewById(R.id.check_title);
             mDateTextView =  itemView.findViewById(R.id.check_date);
-            //mDetailsTextView =  itemView.findViewById(R.id.check_details_tv);
+            mPlaceTextView =  itemView.findViewById(R.id.check_place);
 
         }
 
@@ -114,7 +114,7 @@ public class CheckInListFragment extends Fragment {
             mCheckIn = check;
             mTitleTextView.setText(mCheckIn.getTitle());
             mDateTextView.setText(mCheckIn.getDate().toString());
-            //mDetailsTextView.setText(mCheckIn.getDetails());
+            mPlaceTextView.setText(mCheckIn.getPlace());
         }
 
         @Override

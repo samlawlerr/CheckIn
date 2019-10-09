@@ -3,7 +3,9 @@
     <string name="check_title_hint">Enter a title for the check in.</string>
     <string name="check_title_label">Title</string>
     <string name="checkin_details_label">Details</string>
+    <string name="checkin_place_label">Place</string>
     <string name="details_label">Details of the check in</string>
+    <string name="place_label">Place of the check in</string>
     <string name="date_picker_title">Date of check in:</string>
     <string name="new_checkin">New Check in</string>
     <string name="help">Help</string>

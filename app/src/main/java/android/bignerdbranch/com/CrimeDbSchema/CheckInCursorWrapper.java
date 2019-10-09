@@ -16,6 +16,7 @@ public class CheckInCursorWrapper extends CursorWrapper {
         String title = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.TITLE));
         long date = getLong(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.DATE));
         String details = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.DETAILS));
+        String place = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.PLACE));
         String location = getString(getColumnIndex(CheckInDbSchema.CheckInTable.Cols.LOCATION));
 
 
@@ -23,6 +24,7 @@ public class CheckInCursorWrapper extends CursorWrapper {
         check.setTitle(title);
         check.setDate(new Date(date));
         check.setDetails(details);
+        check.setPlace(place);
         check.getLocation();
         return check;
     }

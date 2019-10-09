@@ -58,6 +58,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/details_label"/>
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkin_place_label"/>
+    <EditText
+        android:id="@+id/check_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/place_label"/>
     <Button
         android:id="@+id/check_date"
         android:layout_width="match_parent"
