@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/check_title" />
 
     <!--<TextView-->
-        <!--android:id="@+id/check_details"-->
+        <!--android:id="@+id/check_details_tv"-->
         <!--android:layout_width="368dp"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="checkin details"-->

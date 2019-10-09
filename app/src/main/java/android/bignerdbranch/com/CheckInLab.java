@@ -109,6 +109,7 @@ public class CheckInLab {
         values.put(CheckInDbSchema.CheckInTable.Cols.UUID, check.getId().toString());
         values.put(CheckInDbSchema.CheckInTable.Cols.TITLE, check.getTitle());
         values.put(CheckInDbSchema.CheckInTable.Cols.DATE, check.getDate().getTime());
+        values.put(CheckInDbSchema.CheckInTable.Cols.DETAILS, check.getDetails());
         values.put(CheckInDbSchema.CheckInTable.Cols.LOCATION, check.getLocation());
         return values;
     }
