@@ -70,6 +70,7 @@ public class CheckInFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID checkId = (UUID) getArguments().getSerializable(ARG_CHECK_ID);
+
         mCheckIn = CheckInLab.get(getActivity()).getCheckIn(checkId);
         mPhotoFile = CheckInLab.get(getActivity()).getPhotoFile(mCheckIn);
 

@@ -11,6 +11,8 @@ public class CheckIn {
     private String mPlace;
     private double mLat;
     private double mLon;
+    private String mLocation;
+
     public CheckIn() {
         this(UUID.randomUUID());
     }
@@ -53,7 +55,9 @@ public class CheckIn {
         mDate = date;
     }
 
-    public String getLocation() {return "Latitude " + getLat() + " Longitude " + getLon();}
+    public String getLocation() {return "Latitude " + this.getLat() + " Longitude " + this.getLon();}
+
+    public void setLocation(String location) {mLocation = location;}
 
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";
@@ -62,7 +66,12 @@ public class CheckIn {
     public double getLat() {
         return mLat;
     }
+
     public double getLon(){
         return mLon;
     }
+
+    //public void setLat(Double lat) {mLat = lat;}
+    //public void setLon(Double lon) {mLon = lon;}
+
 }

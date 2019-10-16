@@ -25,7 +25,7 @@ public class CheckInCursorWrapper extends CursorWrapper {
         check.setDate(new Date(date));
         check.setDetails(details);
         check.setPlace(place);
-        check.getLocation();
+        check.setLocation(location);
         return check;
     }
 }
