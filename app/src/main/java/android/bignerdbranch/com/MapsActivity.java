@@ -14,8 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private double mLatitude = 0;
-    private double mLongitude = 0;
+    private double mLatitude;
+    private double mLongitude;
 
 
     @Override
@@ -39,7 +39,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void updateUI(){
         LatLng myPoint = new LatLng(mLatitude, mLongitude);
         MarkerOptions myMarker = new MarkerOptions().position(myPoint).title("Receipt location");
-
         mMap.clear();
         mMap.addMarker(myMarker);
 

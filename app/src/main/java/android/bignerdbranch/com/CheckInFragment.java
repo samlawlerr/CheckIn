@@ -247,8 +247,8 @@ public class CheckInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("latitude", mCheckIn.getLat());
-                intent.putExtra("longitude", mCheckIn.getLon());
+                intent.putExtra("lat", mCheckIn.setLat());
+                intent.putExtra("lon", mCheckIn.setLon());
                 startActivity(intent);
             }
         });
@@ -294,7 +294,6 @@ public class CheckInFragment extends Fragment {
     }
 
     private String getCheckInReport() {
-
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat,
                 mCheckIn.getDate()).toString();
